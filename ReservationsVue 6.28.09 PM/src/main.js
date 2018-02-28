@@ -29,3 +29,6 @@ firebase.auth().onAuthStateChanged(function(user) {
     })
   }
 });
+
+export const db = firebase.database();
+export const restaurant_db = db.ref('restaurants');

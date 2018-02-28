@@ -37,6 +37,9 @@
 <style scoped>  /* "scoped" attribute limit the CSS to this component only */
   .login {
     margin-top: 40px;
+    padding-left: 10%;
+    padding-right: 10%;
+
   }
   input {
     margin: 10px 0;

@@ -1,34 +1,33 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://gitter.im/vuejs/vue" target="_blank">Gitter Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-      <br>
-      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank">Docs for This Template</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
-    <button v-on:click="logout">Logout</button>
+
+    <br>
+    <a id="see_restaurant" v-on:click="show_cards" class="waves-effect waves-light btn-large">
+      See Restaurants
+    </a>
+
+    <div class="cards">
+      <div id="restaurant_list">
+        <!-- Cards HERE -->
+      </div>
+    </div>
+
   </div>
 </template>
 
 <script>
+  document.getElementById('log_out').innerHTML += "Log Out";
+</script>
+
+<script>
 import firebase from 'firebase';
+//firebase.app().initializeApp()
 
 export default {
   name: 'hello',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Tableu'
     }
   },
   methods: {
@@ -36,13 +35,31 @@ export default {
       firebase.auth().signOut().then(() => {
         this.$router.replace('login')
       })
+    },
+    show_cards: function(){
+      
+      var rootRef = firebase.database().ref();
+      rootRef.once("value").then(function(snapshot) {
+        snapshot.child("restaurants").forEach(function(val){
+          $('#restaurant_list').append('<div><div class="col-lg-3 col-md-3 col-xs-6 card"><a href="#" class="d-block mb-4 h-100"><h4>' + val.child("name").val() + '</h4></a> </div></div>');
+          //<div id="restaurant_list"><div class="col-lg-3 col-md-3 col-xs-6 card"><a href="#" class="d-block mb-4 h-100"><img class="img-fluid img-thumbnail" src="' + val.child("image").val() + '" alt=""><h4>' + val.child("name").val() + '</h4></a> </div></div>
+        });
+      });
+
     }
   }
 }
 </script>
 
+
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.hello{
+  padding-left: 2%;
+  padding-right: 2%;
+  text-align: left;
+}
+
 h1, h2 {
   font-weight: normal;
 }
@@ -59,5 +76,13 @@ li {
 
 a {
   color: #42b983;
+}
+
+#see_restaurant{
+  color: white;
+}
+
+.card{
+  padding: 2%;
 }
 </style>
