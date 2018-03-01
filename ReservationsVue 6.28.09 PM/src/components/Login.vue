@@ -4,22 +4,42 @@
     <input type="text" v-model="email" placeholder="Email"><br>
     <input type="password" v-model="password" placeholder="Password"><br>
     <button v-on:click="signIn">Connection</button>
+      <fb-signin-button
+    :params="fbSignInParams"
+    @success="onSignInSuccess"
+    @error="onSignInError">
+    Sign in with Facebook
+  </fb-signin-button>
     <p>You don't have an account ? You can <router-link to="/sign-up">create one</router-link></p>
+    
   </div>
 </template>
 
 <script>
-  import firebase from 'firebase'
+ import firebase from 'firebase'
 
   export default {
     name: 'login',
     data: function() {
       return {
         email: '',
-        password: ''
+        password: '',
+        fbSignInParams: {
+        scope: 'email,user_likes',
+        return_scopes: true
+        }
       }
     },
     methods: {
+      onSignInSuccess(response){
+              FB.api('/me', dude => {
+        console.log(`Good to see you, ${dude.name}.`)
+      })
+    },
+    onSignInError (error) {
+      console.log('OH NOES', error)
+      }
+    },
       signIn: function() {
         firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
           (user) => {
@@ -31,7 +51,8 @@
         );
       }
     }
-  }
+  
+
 </script>
 
 <style scoped>  /* "scoped" attribute limit the CSS to this component only */
@@ -58,5 +79,13 @@
   p a {
     text-decoration: underline;
     cursor: pointer;
+  }
+   .fb-signin-button {
+  /* This is where you control how the button looks. Be creative! */
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 3px;
+  background-color: #4267b2;
+  color: #fff;
   }
 </style>
