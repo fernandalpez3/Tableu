@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Hello from '@/components/Hello'
 import Login from '@/components/Login'
 import SignUp from '@/components/SignUp'
+import SignUpRestaurant from '@/components/SignUpRestaurant'
 import LoginRestaurant from '@/components/LoginRestaurant'
 import HelloRestaurant from '@/components/HelloRestaurant'
 import AddTable from "@/components/AddTable"
@@ -35,6 +36,11 @@ let router = new Router({
       path: '/sign-up',
       name: 'SignUp',
       component: SignUp
+    },
+    {
+      path: '/signUpRestaurant',
+      name: 'SignUpRestaurant',
+      component: SignUpRestaurant
     },
     {
       path: '/addTable',
