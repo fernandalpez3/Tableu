@@ -4,7 +4,7 @@
     <input type="text" v-model="email" placeholder="Email"><br>
     <input type="password" v-model="password" placeholder="Password"><br>
     <button v-on:click="signIn">Connection</button>
-      <fb-signin-button
+     <fb-signin-button
     :params="fbSignInParams"
     @success="onSignInSuccess"
     @error="onSignInError">
@@ -16,7 +16,7 @@
 </template>
 
 <script>
- import firebase from 'firebase'
+  import firebase from 'firebase'
 
   export default {
     name: 'login',
@@ -31,15 +31,6 @@
       }
     },
     methods: {
-      onSignInSuccess(response){
-              FB.api('/me', dude => {
-        console.log(`Good to see you, ${dude.name}.`)
-      })
-    },
-    onSignInError (error) {
-      console.log('OH NOES', error)
-      }
-    },
       signIn: function() {
         firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
           (user) => {
@@ -50,9 +41,16 @@
           }
         );
       }
-    }
-  
-
+    },
+     onSignInSuccess(response){
+              FB.api('/me', dude => {
+        console.log(`Good to see you, ${dude.name}.`)
+      })
+    },
+    onSignInError (error) {
+      console.log('OH NOES', error)
+      }
+  }
 </script>
 
 <style scoped>  /* "scoped" attribute limit the CSS to this component only */
