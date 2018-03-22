@@ -41,7 +41,7 @@ export default {
       var rootRef = firebase.database().ref();
       rootRef.once("value").then(function(snapshot) {
         snapshot.child("restaurants").forEach(function(val){
-          $('#restaurant_list').append('<div><div class="col-lg-3 col-md-3 col-xs-6 card"><a href="#" class="d-block mb-4 h-100"><h4>' + val.child("name").val() + '</h4></a> </div></div>');
+          $('#restaurant_list').append('<div><div class="col-lg-3 col-md-3 col-xs-6 card"><a href="#" class="d-block mb-4 h-100" id="'+ val.val() +'"><h4>' + val.child("name").val() + '</h4></a></div></div>');
           //<div id="restaurant_list"><div class="col-lg-3 col-md-3 col-xs-6 card"><a href="#" class="d-block mb-4 h-100"><img class="img-fluid img-thumbnail" src="' + val.child("image").val() + '" alt=""><h4>' + val.child("name").val() + '</h4></a> </div></div>
         });
       });
