@@ -3,15 +3,8 @@
     <h3>Sign In</h3>
     <input type="text" v-model="email" placeholder="Email"><br>
     <input type="password" v-model="password" placeholder="Password"><br>
-    <button v-on:click="goToRestaurant">Restaurnt</button>
     <button v-on:click="signIn">Connection</button>
-     <fb-signin-button
-    :params="fbSignInParams"
-    @success="onSignInSuccess"
-    @error="onSignInError">
-    Sign in with Facebook
-  </fb-signin-button>
-    <p>You don't have an account ? You can <router-link to="/sign-up">create one</router-link></p>
+    <p>You don't have an account ? You can <router-link to="/signUpRestaurant">create one</router-link></p>
     
   </div>
 </template>
@@ -20,7 +13,7 @@
   import firebase from 'firebase'
 
   export default {
-    name: 'login',
+    name: 'loginRestaurant',
     data: function() {
       return {
         email: '',
@@ -35,22 +28,13 @@
       signIn: function() {
         firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
           (user) => {
-            this.$router.replace('hello')
+            this.$router.replace('helloRestaurant')
           },
           (err) => {
             alert('Oops. ' + err.message)
           }
         );
-      },
-      goToRestaurant: function(){
-        this.$router.replace('loginRestaurant');
-        console.log("Papaya");
       }
-    },
-     onSignInSuccess(response){
-              FB.api('/me', dude => {
-        console.log(`Good to see you, ${dude.name}.`)
-      })
     },
     onSignInError (error) {
       console.log('OH NOES', error)
