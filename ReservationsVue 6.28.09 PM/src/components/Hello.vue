@@ -2,13 +2,17 @@
   <div class="hello">
 
     <br>
-    <a id="see_restaurant" v-on:click="show_cards" class="waves-effect waves-light btn-large">
+    <!--<a id="see_restaurant" v-on:click="show_cards" class="waves-effect waves-light btn-large">
       See Restaurants
-    </a>
+    </a>-->
 
     <div class="cards">
       <div id="restaurant_list">
         <!-- Cards HERE -->
+        <template v-for="restaurant in restaurants_names">
+            <restaurantCard :key='restaurant.id' :name="restaurant.name" v-bind='restaurant'></restaurantCard>
+        </template>
+
       </div>
     </div>
 
@@ -18,17 +22,25 @@
 
 <script>
 document.getElementById('log_out').innerHTML += "Log Out";
+function a(){
+  console.log("a");
+}
 </script>
 
 <script>
 import firebase from 'firebase';
+import restaurantCard from './restaurantCard.vue';
 //firebase.app().initializeApp()
 
 export default {
   name: 'hello',
+  components: {
+    restaurantCard
+  },
   data () {
     return {
-      msg: 'Tableu'
+      msg: 'Tableu',
+      restaurants_names: []
     }
   },
   methods: {
@@ -39,25 +51,29 @@ export default {
     },
     click_restaurant: function() {
       console.log("hola");
+      this.$router.replace('client-reservation-table');
       /*
       if (event) {
-        targetId = event.currentTarget.id;
-        console.log(targetId);
-        alert(targetId);
-      }*/
-    },
-    show_cards: function(){
-
-      var rootRef = firebase.database().ref();
-      rootRef.once("value").then(function(snapshot) {
-        snapshot.child("restaurants").forEach(function(val){
-          $('#restaurant_list').append('<div><div class="col-lg-3 col-md-3 col-xs-6 card"><a href="#" class="d-block mb-4 h-100" id="'+ val.key +'" v-on:click="click_restaurant"><h4>' + val.child("name").val() + '</h4></a></div></div>');
-          //<div id="restaurant_list"><div class="col-lg-3 col-md-3 col-xs-6 card"><a href="#" class="d-block mb-4 h-100"><img class="img-fluid img-thumbnail" src="' + val.child("image").val() + '" alt=""><h4>' + val.child("name").val() + '</h4></a> </div></div>
-        });
+      targetId = event.currentTarget.id;
+      console.log(targetId);
+      alert(targetId);
+    }*/
+  },
+  show_cards: function(){
+    // The view model.
+    var vm = this;
+    var rootRef = firebase.database().ref();
+    rootRef.once("value").then(function(snapshot) {
+      snapshot.child("restaurants").forEach(function(val){
+        vm.$data.restaurants_names.push({name : val.child("name").val(), id: val.key});
       });
+    });
 
-    }
   }
+},
+beforeMount(){
+  this.show_cards();
+}
 }
 </script>
 
