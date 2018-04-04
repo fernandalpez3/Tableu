@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Hello from '@/components/Hello'
 import Login from '@/components/Login'
 import clientReservationTable from '@/components/clientReservationTable'
+import restaurantCard from '@/components/restaurantCard'
 import SignUp from '@/components/SignUp'
 import SignUpRestaurant from '@/components/SignUpRestaurant'
 import LoginRestaurant from '@/components/LoginRestaurant'
@@ -63,6 +64,14 @@ let router = new Router({
       path: '/helloRestaurant',
       name: 'HelloRestaurant',
       component: HelloRestaurant,
+      meta: {
+        requiresAuth: true
+      }
+    }
+    ,{
+      path: '/restaurantCard',
+      name: 'restaurantCard',
+      component: restaurantCard,
       meta: {
         requiresAuth: true
       }

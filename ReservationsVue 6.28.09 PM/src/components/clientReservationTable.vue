@@ -3,7 +3,7 @@
     <div class="wrapper">
       <div class="container">
         <h1 style="text-align:center;">{{restaurant_name}}</h1>
-        <h4 style="text-align:center;">Maximum people per Table : 4</h4>
+        <h4 style="text-align:center;">Maximum people per Table: 4</h4>
         <div id="seat-map">
           <div class="front-indicator">Front</div>
         </div>
