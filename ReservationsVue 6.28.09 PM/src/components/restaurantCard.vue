@@ -2,7 +2,7 @@
 
   <div>
     <div class="col-lg-3 col-md-3 col-xs-6 card">
-      <a href="#" class="d-block mb-4 h-100" v-on:click="click_restaurant">
+      <a class="d-block mb-4 h-100" v-on:click="click_restaurant">
         <h4> {{name}}</h4>
       </a>
     </div>

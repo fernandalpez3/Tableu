@@ -1,10 +1,10 @@
 <template>
   <div class="hello">
 
-    <br>
+    <!--<br>
     <a id="see_restaurant" v-on:click="change_page" class="waves-effect waves-light btn-large">
       See Tables
-    </a>
+    </a> -->
 
   <div class="cards">
     <div id="restaurant_list">
