@@ -11,31 +11,40 @@
 </template>
 
 <script lang="js">
-  export default  {
-    name: 'restaurant-card',
-    props: ['name', 'id'],
-    mounted() {
+export default  {
+  name: 'restaurant-card',
+  props: ['name', 'id'],
+  components: {
 
-    },
-    data() {
-      return {
+  },
+  mounted() {
 
-      }
-    },
-    methods: {
-      click_restaurant: function(){
-        console.log(this.name);
-      }
-
-    },
-    computed: {
+  },
+  data() {
+    return {
 
     }
+  },
+  methods: {
+    click_restaurant: function(){
+      console.log(this.name + " : " + this.id);
+      this.$parent.$router.replace('clientReservationTable');
+    }/*,
+    showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.isModalVisible = false;
+    }*/
+  },
+  computed: {
+
+  }
 }
 </script>
 
 <style scoped lang="scss">
-  .restaurant-card {
+.restaurant-card {
 
-  }
+}
 </style>

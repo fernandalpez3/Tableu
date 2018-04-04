@@ -2,21 +2,21 @@
   <div class="hello">
 
     <br>
-    <!--<a id="see_restaurant" v-on:click="show_cards" class="waves-effect waves-light btn-large">
-      See Restaurants
-    </a>-->
+    <a id="see_restaurant" v-on:click="change_page" class="waves-effect waves-light btn-large">
+      See Tables
+    </a>
 
-    <div class="cards">
-      <div id="restaurant_list">
-        <!-- Cards HERE -->
-        <template v-for="restaurant in restaurants_names">
-            <restaurantCard :key='restaurant.id' :name="restaurant.name" v-bind='restaurant'></restaurantCard>
-        </template>
+  <div class="cards">
+    <div id="restaurant_list">
+      <!-- Cards HERE -->
+      <template v-for="restaurant in restaurants_names">
+        <restaurantCard :key='restaurant.id' :name="restaurant.name" v-bind='restaurant'></restaurantCard>
+      </template>
 
-      </div>
     </div>
-
   </div>
+
+</div>
 
 </template>
 
@@ -40,7 +40,8 @@ export default {
   data () {
     return {
       msg: 'Tableu',
-      restaurants_names: []
+      restaurants_names: [],
+      isModalVisible: false,
     }
   },
   methods: {
@@ -49,31 +50,23 @@ export default {
         this.$router.replace('login')
       })
     },
-    click_restaurant: function() {
-      console.log("hola");
-      this.$router.replace('client-reservation-table');
-      /*
-      if (event) {
-      targetId = event.currentTarget.id;
-      console.log(targetId);
-      alert(targetId);
-    }*/
-  },
-  show_cards: function(){
-    // The view model.
-    var vm = this;
-    var rootRef = firebase.database().ref();
-    rootRef.once("value").then(function(snapshot) {
-      snapshot.child("restaurants").forEach(function(val){
-        vm.$data.restaurants_names.push({name : val.child("name").val(), id: val.key});
+    change_page: function(){
+      this.$parent.$router.replace('clientReservationTable');
+    },
+    show_cards: function(){
+      // The view model.
+      var vm = this;
+      var rootRef = firebase.database().ref();
+      rootRef.once("value").then(function(snapshot) {
+        snapshot.child("restaurants").forEach(function(val){
+          vm.$data.restaurants_names.push({name : val.child("name").val(), id: val.key});
+        });
       });
-    });
-
+    }
+  },
+  beforeMount(){
+    this.show_cards();
   }
-},
-beforeMount(){
-  this.show_cards();
-}
 }
 </script>
 

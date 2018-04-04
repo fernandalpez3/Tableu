@@ -12,7 +12,7 @@
     Sign in with Facebook
   </fb-signin-button>
     <p>You don't have an account ? You can <router-link to="/sign-up">create one</router-link></p>
-    
+
   </div>
 </template>
 
@@ -44,7 +44,7 @@
       },
       goToRestaurant: function(){
         this.$router.replace('loginRestaurant');
-        console.log("Papaya");
+        console.log("Papaya");//??
       }
     },
      onSignInSuccess(response){

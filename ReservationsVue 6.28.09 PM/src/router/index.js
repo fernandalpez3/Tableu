@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 import Hello from '@/components/Hello'
 import Login from '@/components/Login'
+import clientReservationTable from '@/components/clientReservationTable'
 import SignUp from '@/components/SignUp'
 import SignUpRestaurant from '@/components/SignUpRestaurant'
 import LoginRestaurant from '@/components/LoginRestaurant'
@@ -62,6 +63,14 @@ let router = new Router({
       path: '/helloRestaurant',
       name: 'HelloRestaurant',
       component: HelloRestaurant,
+      meta: {
+        requiresAuth: true
+      }
+    }
+    ,{
+      path: '/clientReservationTable',
+      name: 'clientReservationTable',
+      component: clientReservationTable,
       meta: {
         requiresAuth: true
       }
