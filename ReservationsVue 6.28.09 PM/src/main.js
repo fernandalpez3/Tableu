@@ -4,8 +4,27 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import firebase from 'firebase'
+import FBSignInButton from 'vue-facebook-signin-button'
 
 Vue.config.productionTip = false
+Vue.use(FBSignInButton)
+
+window.fbAsyncInit = function() {
+  FB.init({
+    appId      : '207363733335482',
+    cookie     : true,  // enable cookies to allow the server to access the session
+    xfbml      : true,  // parse social plugins on this page
+    version    : 'v2.8' // use graph api version 2.8
+  });
+};
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
 
 let app;
 let config = {
