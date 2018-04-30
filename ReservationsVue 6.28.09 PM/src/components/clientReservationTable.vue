@@ -1,27 +1,28 @@
 <template>
-		<div class="wrapper">
-			<div>
-        <div class="seat-chart-wrapper">
-          <div id="seat-map">
-            <div class="front-indicator">Front</div>
-          </div>
+  <div class="wrapper">
+    <div>
+      <div class="seat-chart-wrapper">
+        <div id="seat-map">
+          <div class="front-indicator">Front</div>
         </div>
-        <br/>
-        <div class='seat-stat-wrapper'>
-          <div id="legend"></div>
-          <div class="booking-details">
-            <h2>Booking Details</h2>
+      </div>
+      <br/>
+      <div class='seat-stat-wrapper'>
+        <div id="legend"></div>
+        <div class="booking-details">
+          <h2>Booking Details</h2>
 
-            <h3> Selected Seats (<span id="counter">0</span>):</h3>
-            <ul id="selected-seats"></ul>
+          <h3> Selected Seats (<span id="counter">0</span>):</h3>
+          <ul id="selected-seats"></ul>
 
-            <h4>Total: Rs.<span id="total">0</span></h4>
+          <h4>Total: Rs.<span id="total">0</span></h4>
 
-            <button class="checkout-button" v-on:click="addTable">Checkout &raquo;</button>
-          </div>
+          <button class="checkout-button" v-on:click="addTable">Checkout &raquo;</button>
+          <button class="checkout-button" v-on:click="change_page" style="background-color: red; color: white">Cancel &raquo;</button>
         </div>
-			</div>
-		</div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -84,23 +85,23 @@ export default {
             //let's create a new <li> which we'll add to the cart items
             $(
               "<li>" +
-                this.data().category +
-                " Table # " +
-                this.settings.label +
-                ": <b>$" +
-                this.data().price +
-                '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li>'
+              this.data().category +
+              " Table # " +
+              this.settings.label +
+              ": <b>$" +
+              this.data().price +
+              '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li>'
             )
-              .attr("id", "cart-item-" + this.settings.id)
-              .data("seatId", this.settings.id)
-              .appendTo($cart);
+            .attr("id", "cart-item-" + this.settings.id)
+            .data("seatId", this.settings.id)
+            .appendTo($cart);
 
             /*
-					 * Lets update the counter and total
-					 *
-					 * .find function will not find the current seat, because it will change its stauts only after return
-					 * 'selected'. This is why we have to add 1 to the length and the current seat price to the total.
-					 */
+            * Lets update the counter and total
+            *
+            * .find function will not find the current seat, because it will change its stauts only after return
+            * 'selected'. This is why we have to add 1 to the length and the current seat price to the total.
+            */
             $counter.text(sc.find("selected").length + 1);
             $total.text(recalculateTotal(sc) + this.data().price);
 
@@ -126,20 +127,20 @@ export default {
       };
 
       var $cart = $("#selected-seats"),
-        $counter = $("#counter"),
-        $total = $("#total"),
-        sc = $("#seat-map").seatCharts(this.seatChartOpts);
+      $counter = $("#counter"),
+      $total = $("#total"),
+      sc = $("#seat-map").seatCharts(this.seatChartOpts);
 
       //this will handle "[cancel]" link clicks
       $("#selected-seats").on("click", ".cancel-cart-item", function() {
         //let's just trigger Click event on the appropriate seat, so we don't have to repeat the logic here
         sc
-          .get(
-            $(this)
-              .parents("li:first")
-              .data("seatId")
-          )
-          .click();
+        .get(
+          $(this)
+          .parents("li:first")
+          .data("seatId")
+        )
+        .click();
       });
 
       //let's pretend some seats have already been booked
@@ -162,8 +163,8 @@ export default {
       $(".seatCharts-row").remove();
       $(".seatCharts-legendItem").remove();
       $("#seat-map,#seat-map *")
-        .unbind()
-        .removeData();
+      .unbind()
+      .removeData();
 
       var firstSeatLabel = 1;
       this.tablesMap.push("ee_ee");
@@ -175,6 +176,9 @@ export default {
         }
       };
       $("#seat-map").seatCharts(seatChartOpts);
+    },
+    change_page: function(){
+      this.$router.replace('hello');
     }
   }
 };
@@ -185,6 +189,8 @@ export default {
 /* "scoped" attribute limit the CSS to this component only */
 body {
   font-family: "Lato", sans-serif;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 a {
   color: #b71a4c;
