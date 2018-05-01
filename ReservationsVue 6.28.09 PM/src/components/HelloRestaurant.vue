@@ -6,6 +6,10 @@
       Add Table
     </a>
 
+    <a id="see_restaurant" v-on:click="goToCalendar" class="waves-effect waves-light btn-large">
+      See Reservation
+    </a>
+
     <div class="cards">
       <div id="restaurant_list">
         <!-- Cards HERE -->
@@ -40,6 +44,9 @@ export default {
     },
     addTable: function(){
         this.$router.replace('addTable')
+    },
+    goToCalendar: function(){
+      this.$router.replace('calendar')
     }
   }
 }

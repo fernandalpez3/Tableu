@@ -8,6 +8,7 @@ import SignUp from '@/components/SignUp'
 import SignUpRestaurant from '@/components/SignUpRestaurant'
 import LoginRestaurant from '@/components/LoginRestaurant'
 import HelloRestaurant from '@/components/HelloRestaurant'
+import Calendar from '@/components/calendar'
 import AddTable from "@/components/AddTable"
 import firebase from 'firebase'
 
@@ -71,6 +72,14 @@ let router = new Router({
       path: '/clientReservationTable',
       name: 'clientReservationTable',
       component: clientReservationTable,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/calendar',
+      name: 'calendar',
+      component: Calendar,
       meta: {
         requiresAuth: true
       }
