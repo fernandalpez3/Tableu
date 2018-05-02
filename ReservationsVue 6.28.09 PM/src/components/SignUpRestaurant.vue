@@ -28,6 +28,7 @@
           email: this.email,
           name: this.name, // get firstName
           address: this.address, // get lastName
+          events: [] //for calendar
         };
 
         firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(

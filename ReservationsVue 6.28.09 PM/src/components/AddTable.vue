@@ -21,19 +21,17 @@
     },
     methods: {
       createTable: function() {
-        var tableRef = firebase.database().ref('tables');
         var auth = firebase.auth().currentUser;
+        var tableRef = firebase.database().ref('restaurants/' + auth.uid + '/tables');
         console.log(this.numberOfSeats);
         if( auth != null ){
             if( this.tableNumber != '' && this.numberOfSeats != '' ){
-                tableRef.child(auth.uid)
-                .push({
+                tableRef.push({
                     table: this.tableNumber ,
                     numberSeats: this.numberOfSeats,
-                    user: '0'
                 })
             } else {
-            alert('Please fill at-lease name or email!');
+            alert('Please fill at-least name or email!');
              }
         } else {
             //inform user to login

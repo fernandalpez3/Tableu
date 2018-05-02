@@ -29,18 +29,10 @@ export default  {
   },
   methods: {
     click_restaurant: function(){
-      this.$parent.$router.replace('clientReservationTable');
-      console.log(this.name + ": " + this.id);
-      var id = this.id;
+      console.log(this.name + " : " + this.id);
+      this.$parent.$router.push({ name: 'selectTable', params: {id: this.id }});
+      //modify component:
 
-      var vm = this;
-      var rootRef = firebase.database().ref('tables');
-      rootRef.once("value").then(function(snapshot) {
-        snapshot.child(id).forEach(function(val){
-          console.log("Number of table: " + val.child("table").val());
-          console.log("Number of seats: " + val.child("numberSeats").val());
-        });
-      });
     }
   },
   computed: {

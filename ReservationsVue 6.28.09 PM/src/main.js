@@ -5,9 +5,13 @@ import App from './App'
 import router from './router'
 import firebase from 'firebase'
 import FBSignInButton from 'vue-facebook-signin-button'
+import FullCalendar from 'vue-full-calendar'
+import DatePicker from 'vuejs-datepicker'
 
 Vue.config.productionTip = false
 Vue.use(FBSignInButton)
+Vue.use(FullCalendar)
+Vue.use(DatePicker)
 
 window.fbAsyncInit = function() {
   FB.init({
