@@ -43,10 +43,10 @@ export default {
       })
     },
     addTable: function(){
-        this.$router.replace('addTable')
+        this.$router.push('addTable')
     },
     goToCalendar: function(){
-      this.$router.replace('calendar')
+      this.$router.push('calendar')
     }
   }
 }

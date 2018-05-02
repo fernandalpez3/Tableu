@@ -9,6 +9,7 @@ import SignUpRestaurant from '@/components/SignUpRestaurant'
 import LoginRestaurant from '@/components/LoginRestaurant'
 import HelloRestaurant from '@/components/HelloRestaurant'
 import Calendar from '@/components/calendar'
+import SelectTable from '@/components/SelectTable'
 import AddTable from "@/components/AddTable"
 import firebase from 'firebase'
 
@@ -80,6 +81,15 @@ let router = new Router({
       path: '/calendar',
       name: 'calendar',
       component: Calendar,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/selectTable/:id',
+      name: 'selectTable',
+      component: SelectTable,
+      props: true,
       meta: {
         requiresAuth: true
       }

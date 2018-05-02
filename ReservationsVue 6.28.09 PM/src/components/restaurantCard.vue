@@ -28,14 +28,10 @@ export default  {
   methods: {
     click_restaurant: function(){
       console.log(this.name + " : " + this.id);
-      this.$parent.$router.replace('clientReservationTable');
-    }/*,
-    showModal() {
-      this.isModalVisible = true;
-    },
-    closeModal() {
-      this.isModalVisible = false;
-    }*/
+      this.$parent.$router.push({ name: 'selectTable', params: {id: this.id }});
+      //modify component:
+
+    }
   },
   computed: {
 

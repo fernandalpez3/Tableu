@@ -1,5 +1,6 @@
 <template>
   <div class="wrapper">
+    <!--
     <div>
       <div class="seat-chart-wrapper">
         <div id="seat-map">
@@ -21,8 +22,13 @@
           <button class="checkout-button" v-on:click="change_page" style="background-color: red; color: white">Cancel &raquo;</button>
         </div>
       </div>
+    </div> -->
+    <div class="input-group input-group-lg">
+      <span class="input-group-addon" id="sizing-addon1">Date: </span>
+      <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1">
     </div>
-  </div>
+
+  </div> <!-- End wrapper -->
 </template>
 
 <script>
@@ -206,6 +212,9 @@ a {
 }
 .wrapper {
   /* 	width: 400px; */
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-top: 5%;
 }
 .container {
   margin: 0 auto;

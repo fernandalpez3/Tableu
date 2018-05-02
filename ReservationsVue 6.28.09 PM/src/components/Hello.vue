@@ -1,10 +1,7 @@
 <template>
   <div class="hello">
 
-    <!--<br>
-    <a id="see_restaurant" v-on:click="change_page" class="waves-effect waves-light btn-large">
-      See Tables
-    </a> -->
+
 
   <div class="cards">
     <div id="restaurant_list">
@@ -49,9 +46,6 @@ export default {
       firebase.auth().signOut().then(() => {
         this.$router.replace('login')
       })
-    },
-    change_page: function(){
-      this.$parent.$router.replace('clientReservationTable');
     },
     show_cards: function(){
       // The view model.
