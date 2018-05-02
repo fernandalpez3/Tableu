@@ -141,7 +141,9 @@ import firebase from 'firebase';
             editable : false,
             allDay : false
           });
+          alert("Reservation time: "+ this.startTime + " on " + this.day);
           this.goBack();
+          
           //send email here:
           //send alert about cost here:
         }else{
