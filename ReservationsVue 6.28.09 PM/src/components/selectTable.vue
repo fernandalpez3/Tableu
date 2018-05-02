@@ -137,6 +137,8 @@ import firebase from 'firebase';
             editable : false,
             allDay : false
           });
+          //send email here:
+          //send alert about cost here:
         }else{
           alert("Please complete form.");
         }

@@ -11,6 +11,7 @@
 <script lang="js">
   import FullCalendar from "vue-full-calendar";
   import "fullcalendar/dist/fullcalendar.min.css";
+  import firebase from 'firebase';
 
   export default  {
     name: 'calendar',
@@ -20,32 +21,33 @@
     },
     data() {
       return {
-        events: [
-        {
-            title  : 'event1',
-            start  : '2018-04-30T12:30:00',
-            end    : '2018-04-30T15:30:00',
-            editable : false,
-        },
-        {
-            title  : 'event2',
-            start  : '2010-01-05',
-            end    : '2010-01-07',
-        },
-        {
-            title  : 'event3',
-            start  : '2010-01-09T12:30:00',
-            allDay : false,
-        },
-      ]
-
+        events: []
       }
     },
     methods: {
-
+      updateCalendar: function(){
+        var vm = this;
+        var auth = firebase.auth().currentUser;
+        var rootRef = firebase.database().ref('restaurants/' + auth.uid);
+        rootRef.once("value").then(function(snapshot) {
+          snapshot.child("events").forEach(function(val){
+            console.log(val.child('title').val());
+            vm.$data.events.push({
+              title : val.child('title').val(),
+              start : val.child('start').val(),
+              end : val.child('end').val(),
+              editable : val.child('editable').val(),
+              allDay : val.child('allDay').val()
+            });
+          });
+        });
+      }
     },
     computed: {
 
+    },
+    beforeMount(){
+      this.updateCalendar();
     }
 }
 </script>
