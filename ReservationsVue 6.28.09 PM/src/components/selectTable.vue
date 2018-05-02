@@ -53,6 +53,7 @@
      <div class="row">
        <div class="col s12 l12 m12">
          <button name="reservationButton" v-on:click="makeReservation">Make reservation</button>
+         <button name="reservationButton" v-on:click="goBack">Cancel</button>
        </div>
      </div>
 
@@ -124,6 +125,9 @@ import firebase from 'firebase';
           });
         });
       },
+      goBack(){
+        this.$router.go(-1);
+      },
       makeReservation: function(){
         //var auth = firebase.auth().currentUser;
         var vm = this;
@@ -137,6 +141,7 @@ import firebase from 'firebase';
             editable : false,
             allDay : false
           });
+          this.goBack();
           //send email here:
           //send alert about cost here:
         }else{
