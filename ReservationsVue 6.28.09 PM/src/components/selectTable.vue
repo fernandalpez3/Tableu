@@ -24,9 +24,11 @@
             <option v-for="table in tables" :value="table.table">Table: {{table.table}} ({{table.numberSeats}} seat(s))</option>
           </select>
         </div>
+        <!--
         <div class="col s12 l12 m12">
           <span>Selected: {{ selectedTable }}</span>
         </div>
+        -->
       </div>
 
      <div class="row">
@@ -45,6 +47,12 @@
            <input type="radio" id="six" value="6" v-model="timeSelected" v-on:change="setTime">
            <label for="six">06:00pm to 09:00pm</label>
            <br>
+       </div>
+     </div>
+
+     <div class="row">
+       <div class="col s12 l12 m12">
+         <button name="reservationButton" v-on:click="makeReservation">Make reservation</button>
        </div>
      </div>
 
@@ -71,8 +79,8 @@ import firebase from 'firebase';
         day: "",
         startTime: "",
         endTime: "",
-        timeSelected: '',
-        selectedTable: '',
+        timeSelected: "",
+        selectedTable: "",
         tables: []
       }
     },
@@ -115,7 +123,23 @@ import firebase from 'firebase';
             vm.$data.tables.push({table : val.child("table").val(), numberSeats: val.child("numberSeats").val()});
           });
         });
-
+      },
+      makeReservation: function(){
+        //var auth = firebase.auth().currentUser;
+        var vm = this;
+        var the_id = this.id + "";
+        var tableRef = firebase.database().ref('restaurants/' + the_id + '/events');
+        if((vm.$data.day != "") && (vm.$data.startTime != "") && (vm.$data.endTime != "") && (vm.$data.selectedTable != "")){
+          tableRef.push({
+            title : "table " + vm.$data.selectedTable,
+            start : vm.$data.day + vm.$data.startTime,
+            end : vm.$data.day + vm.$data.endTime,
+            editable : false,
+            allDay : false
+          });
+        }else{
+          alert("Please complete form.");
+        }
       }
 
     },
