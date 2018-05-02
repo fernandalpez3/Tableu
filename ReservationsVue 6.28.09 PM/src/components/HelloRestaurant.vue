@@ -10,11 +10,11 @@
       See Reservation
     </a>
 
-    <div class="cards">
-      <div id="restaurant_list">
-        <!-- Cards HERE -->
-      </div>
-    </div>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+    <a id="see_restaurant" v-on:click="deleteRestaurant" class="waves-effect waves-light btn-large">
+      Delete Restaurant
+    </a>
 
   </div>
 </template>
@@ -47,6 +47,28 @@ export default {
     },
     goToCalendar: function(){
       this.$router.push('calendar')
+    },
+    deleteRestaurant: function(){
+      var vm = this;
+      var rootRef = firebase.database().ref();
+      var res = rootRef.child("restaurants");
+      var auth = firebase.auth().currentUser.uid;
+      var toDelete = res.child(auth);
+      toDelete.remove();
+
+      console.log(auth);
+
+      var user = firebase.auth().currentUser;
+      console.log(user);
+
+      user.delete().then(response => {
+        firebase.auth().signOut().then(() => {
+          this.$router.replace('login');
+        })
+      }).catch(function(error) {
+        // An error happened.
+      });
+      
     }
   }
 }
